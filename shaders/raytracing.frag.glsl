@@ -75,6 +75,8 @@ Hit intersect(Ray r) {
         Material(vec3(1.0, 0.4, 0.2), vec3(0.8), true, false));
     sphere(h, r, vec4(-3.5, -1.2, -6.0, 0.8),
         Material(vec3(0.2, 0.6, 0.3), vec3(0.8), false, false));
+    sphere(h, r, vec4(-0.6, -0.3, -4.0, 1.3),
+        Material(vec3(0.3, 0.4, 0.8), vec3(0.8), false, false));
     circle(h, r, -2.0, 50.0,
         Material(vec3(0.8, 0.8, 0.8), vec3(0.0), false, true));
     return h;
@@ -89,6 +91,11 @@ vec3 illuminate(vec3 lightPosition, vec3 pos, vec3 wo, Hit h) {
         vec2 coords = floor(pos.xz);
         kd = vec3(mod(coords.x + coords.y, 2.0) * 0.8 + 0.2);
     }
+    Hit h2 = intersect(Ray(pos, lightPosition));
+    if (h2.time != inf) {
+        return vec3(0.0);
+    }
+
     float intensity = 1.0 / dot(wi, wi); // inverse-square law
     vec3 diffuse = kd * max(dot(normalize(wi), h.normal), 0.0);
 
@@ -105,6 +112,7 @@ vec3 calcLighting(vec3 pos, vec3 wo, Hit h) {
     vec3 color = vec3(0.0);
     color += 100.0 * illuminate(vec3(-3.0, 10.0, 0.0), pos, wo, h);
     color += 200000.0 * illuminate(vec3(0.0, 1000.0, 0.0), pos, wo, h);
+    color += 1200.0 * illuminate(vec3(10.0, 50.0, 0.0), pos, wo, h);
     return color;
 }
 
