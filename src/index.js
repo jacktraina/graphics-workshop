@@ -81,7 +81,7 @@ function initPane() {
     a.click();
   });
 
-  const saved = localStorage.getItem("traina-graphics-workshop");
+  const saved = localStorage.getItem("graphics-workshop");
   if (saved) {
     try {
       pane.importPreset(JSON.parse(saved));
@@ -92,7 +92,7 @@ function initPane() {
 
   const update = () => {
     const data = pane.exportPreset();
-    localStorage.setItem("traina-graphics-workshop", JSON.stringify(data));
+    localStorage.setItem("graphics-workshop", JSON.stringify(data));
     for (const [input, projects] of inputs) {
       input.hidden = !projects.includes(params.project);
     }
