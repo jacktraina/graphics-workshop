@@ -15,7 +15,7 @@ vec3 illuminate(vec3 lightPosition) {
 
     vec3 wo = normalize(eye - vPosition);
     vec3 r = reflect(normalize(wi), normalize(vNormal));
-    vec3 specular = max(pow(dot(wo, r), shininess), 0.0) * ks;
+    vec3 specular = pow(max(dot(wo, r), 0.0), shininess) * ks;
     return intensity * (diffuse + specular);
 }
 

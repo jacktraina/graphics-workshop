@@ -92,7 +92,7 @@ vec3 illuminate(vec3 lightPosition, vec3 pos, vec3 wo, Hit h) {
         kd = vec3(mod(coords.x + coords.y, 2.0) * 0.8 + 0.2);
     }
     Hit h2 = intersect(Ray(pos, lightPosition - pos));
-    if (h2.time != inf) {
+    if (h2.time < 1.0) {
         return vec3(0.0);
     }
 
